@@ -6,7 +6,7 @@ def angles_to_vector(mag,alpha,beta,gamma):
 
 
 class Vector:
-    def __init__(self, i, j, k):
+    def __init__(self, i, j, k=0):
         self.i = i
         self.j = j
         self.k = k
@@ -61,10 +61,25 @@ class Vector:
     def clone(self):
         return Vector(self.i , self.j, self.k)
 
+    def projection_on(self,b):
+        a_dot_b =  self.dot_product(b)
+        mag_b = b.magnitude()
+        print(a_dot_b/(mag_b*mag_b))
+        proj = b.clone()
+        proj.mult(a_dot_b/(mag_b*mag_b))
+        return proj
+
+
     def __str__(self):
         return "( " + str(self.i) + ", " + str(self.j) + ", " + str(self.k) + " )"
 
     __repr__ = __str__
+
+def vector_from_angles_2D(mag, angle)-> Vector:
+    x = mag*cos(angle)
+    y = mag*sin(angle)
+    return Vector(x,y,0)
+
 
 
 class Point:
